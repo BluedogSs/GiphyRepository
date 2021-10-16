@@ -1,23 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import './assets/css/App.css';
+import ListOfGifs from './components/ListOfGifs';
+import { Route } from "wouter"
+import Home from './Home/Index';
+
+
 
 function App() {
+  const [isBlack, setIsBlack] = useState(false)
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className={isBlack ? "App-content-black" : ""}>
+        <section className="App-content" >
+          <Route
+            path="/">
+            <Home isBlack={isBlack} setIsBlack={setIsBlack} />
+          </Route>
+          <Route
+            component={ListOfGifs}
+            path="/gif/:keyword" />
+
+        </section>
+      </div>
     </div>
   );
 }
